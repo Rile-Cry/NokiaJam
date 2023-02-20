@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scn/chr/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://res/tlm/Walls.tres" type="TileSet" id=2]
 [ext_resource path="res://scn/chr/Spike.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scn/chr/Key.tscn" type="PackedScene" id=4]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -18,3 +19,7 @@ position = Vector2( -37, 0 )
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource( 1 )]
 position = Vector2( 4, -4 )
+
+[node name="Key" parent="." instance=ExtResource( 4 )]
+position = Vector2( -53, -4 )
+floatDist = 4

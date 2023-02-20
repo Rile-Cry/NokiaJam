@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="Item" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 6.0
+margin_bottom = 6.0

@@ -13,6 +13,10 @@ public class PlayerController : KinematicBody2D
 	private AudioStreamPlayer _stream;
 	private Timer _invuln;
 	
+	// Signals
+	[Signal] public delegate void addItem(string new_item);
+	[Signal] public delegate void removeItem(string item);
+	
 	// Variables
 	private Vector2 dir = new Vector2(0, 0);
 	private bool invuln = false;
@@ -123,6 +127,11 @@ public class PlayerController : KinematicBody2D
 		{
 			var collider = collisionInfo.Collider as Node;
 			if (collider.IsInGroup("HarmObjects")) ChangeHealth();
+			if (collider.IsInGroup("Keys"))
+			{
+				EmitSignal("addItem", "key");
+				GetTree().CallGroup("Keys", "PickupKey");
+			}
 		}
 	}
 	
