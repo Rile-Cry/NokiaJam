@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://spt/PlayerController.cs" type="Script" id=1]
 [ext_resource path="res://img/plr/PlayerMove.png" type="Texture" id=2]
 [ext_resource path="res://img/ui/health.png" type="Texture" id=3]
+[ext_resource path="res://img/ui/inventory.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 3.5 )
@@ -56,6 +57,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="StyleBoxEmpty" id=11]
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 5
@@ -82,3 +85,45 @@ frames = SubResource( 10 )
 
 [node name="Invuln" type="Timer" parent="."]
 autostart = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -38.0
+margin_top = 14.0
+margin_right = -7.0
+margin_bottom = 21.0
+texture = ExtResource( 4 )
+
+[node name="GridContainer" type="GridContainer" parent="TextureRect"]
+margin_right = 31.0
+margin_bottom = 7.0
+
+[node name="Slot1" type="Panel" parent="TextureRect/GridContainer"]
+custom_styles/panel = SubResource( 11 )
+
+[node name="Slot2" type="Panel" parent="TextureRect/GridContainer"]
+margin_left = 7.0
+margin_top = 1.0
+margin_right = 12.0
+margin_bottom = 6.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="Slot3" type="Panel" parent="TextureRect/GridContainer"]
+margin_left = 13.0
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 6.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="Slot4" type="Panel" parent="TextureRect/GridContainer"]
+margin_left = 19.0
+margin_top = 1.0
+margin_right = 24.0
+margin_bottom = 6.0
+custom_styles/panel = SubResource( 11 )
+
+[node name="Slot5" type="Panel" parent="TextureRect/GridContainer"]
+margin_left = 25.0
+margin_top = 1.0
+margin_right = 30.0
+margin_bottom = 6.0
+custom_styles/panel = SubResource( 11 )

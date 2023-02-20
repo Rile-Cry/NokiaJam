@@ -6,9 +6,6 @@
 
 [node name="TestLevel" type="Node2D"]
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource( 1 )]
-position = Vector2( 4, -4 )
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
@@ -18,3 +15,6 @@ tile_data = PoolIntArray( -65531, 0, 196609, -65530, 0, 3, -65529, 0, 3, -65528,
 
 [node name="Spike" parent="." instance=ExtResource( 3 )]
 position = Vector2( -37, 0 )
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource( 1 )]
+position = Vector2( 4, -4 )
