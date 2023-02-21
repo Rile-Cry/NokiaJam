@@ -6,6 +6,7 @@ public class PlayerController : KinematicBody2D
 	// Resource References
 	private AudioStream _jump = (AudioStream) ResourceLoader.Load("res://snd/jump.wav");
 	private AudioStream _hurt = (AudioStream) ResourceLoader.Load("res://snd/hurt.wav");
+	private AudioStream _pickup = (AudioStream) ResourceLoader.Load("res://snd/pickup.wav");
 	
 	// Node References
 	private AnimatedSprite _health;
@@ -129,6 +130,8 @@ public class PlayerController : KinematicBody2D
 			if (collider.IsInGroup("HarmObjects")) ChangeHealth();
 			if (collider.IsInGroup("Keys"))
 			{
+				_stream.Stream = _pickup;
+				_stream.Play();
 				EmitSignal("addItem", "key");
 				GetTree().CallGroup("Keys", "PickupKey");
 			}
