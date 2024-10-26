@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class PlayerController : KinematicBody2D
+public partial class PlayerController : CharacterBody2D
 {
 	// Resource References
 	private AudioStream _jump = (AudioStream) ResourceLoader.Load("res://snd/jump.wav");
@@ -9,14 +9,16 @@ public class PlayerController : KinematicBody2D
 	private AudioStream _pickup = (AudioStream) ResourceLoader.Load("res://snd/pickup.wav");
 	
 	// Node References
-	private AnimatedSprite _health;
-	private AnimatedSprite _sprite;
+	private AnimatedSprite2D _health;
+	private CharacterBody2D _platform;
+	private AnimatedSprite2D _sprite;
 	private AudioStreamPlayer _stream;
 	private Timer _invuln;
 	
 	// Signals
 	[Signal] public delegate void addItem(string new_item);
 	[Signal] public delegate void removeItem(string item);
+	[Signal] public delegate void useKey();
 	
 	// Variables
 	private Vector2 dir = new Vector2(0, 0);
@@ -28,6 +30,8 @@ public class PlayerController : KinematicBody2D
 	private int jumpPoint = 5; // The point during the jump that the player is at
 	private int jumpPointMax = 5; // The max point for jumpPoint
 	private bool jumpSound = true; // Tells when the jump sound can be played
+	private bool onPlatform = false;
+	private Vector2 platVel = new Vector2(0, 0);
 	private int speed = 2; // The player's move speed
 	
 	// Called when the body_entered signal is recieved
@@ -50,14 +54,20 @@ public class PlayerController : KinematicBody2D
 		invuln = false;
 	}
 	
+	// The reciever for the Platform's 'moving' signal
+	public void PlatformMoving(Vector2 vel)
+	{
+		platVel = vel;
+	}
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_health = GetNode<AnimatedSprite>("HealthBar");
-		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		_health = GetNode<AnimatedSprite2D>("HealthBar");
+		_sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		_stream = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		_invuln = GetNode<Timer>("Invuln");
-		_invuln.Connect("timeout", this, "OnInvulnTimeout");
+		_invuln.Connect("timeout", new Callable(this, "OnInvulnTimeout"));
 	}
 	
 	// Called every tick to process physics
@@ -106,6 +116,11 @@ public class PlayerController : KinematicBody2D
 			_stream.Stream = _jump;
 			if (jumpSound) _stream.Play();
 			jumpSound = false;
+			
+			if (onPlatform)
+			{
+				OffPlatform();
+			}
 		}
 		
 		if (jumping && jumpPoint > 0 && grounded)
@@ -123,7 +138,7 @@ public class PlayerController : KinematicBody2D
 	// Called during PhysicsProcess to gie the result of MovementControl
 	private void MovementResult()
 	{
-		var collisionInfo = MoveAndCollide(dir);
+		var collisionInfo = MoveAndCollide(dir + platVel);
 		if (collisionInfo != null)
 		{
 			var collider = collisionInfo.Collider as Node;
@@ -133,9 +148,11 @@ public class PlayerController : KinematicBody2D
 				_stream.Stream = _pickup;
 				_stream.Play();
 				EmitSignal("addItem", "key");
-				GetTree().CallGroup("Keys", "PickupKey");
+				collider.QueueFree();
 			}
 		}
+		
+		platVel = new Vector2(0, 0);
 	}
 	
 	// Called during PhysicsProcess to calculate gravity on the player
@@ -145,6 +162,8 @@ public class PlayerController : KinematicBody2D
 		
 		if (collisionInfo != null)
 		{
+			var collider = collisionInfo.Collider as Node;
+			
 			if (collisionInfo.GetPosition().y > Position.y)
 			{
 				jumping = false;
@@ -152,8 +171,26 @@ public class PlayerController : KinematicBody2D
 				grounded = true;
 			}
 			
-			var collider = collisionInfo.Collider as Node;
 			if (collider.IsInGroup("HarmObjects")) ChangeHealth();
+			if (collider.IsInGroup("Platforms")) 
+			{
+				if (!onPlatform)
+				{
+					_platform = (CharacterBody2D) collider;
+					_platform.Connect("moving", new Callable(this, "PlatformMoving"));
+					onPlatform = true;
+				}
+			}
+		} else
+		{
+			if (onPlatform) OffPlatform();
 		}
+	}
+	
+	private void OffPlatform()
+	{
+		_platform.Disconnect("moving", new Callable(this, "PlatformMoving"));
+		_platform = null;
+		onPlatform = false;
 	}
 }

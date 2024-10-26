@@ -1,69 +1,79 @@
 using Godot;
 using System;
 
-public class Platform : KinematicBody2D
-{
-	// Node Reference
-	private Position2D _pointA;
-	private Position2D _pointB;
-	
+public partial class Platform : CharacterBody2D
+{	
 	// Enums
 	[Flags] private enum PlatformType
 	{
 		Static,
-		Horizontal,
-		Vertical
+		Dynamic
 	}
 	
+	// Signals
+	[Signal] private delegate void moving(Vector2 vel);
+	
 	// Variables
+	private bool aToB = true;
+	private Vector2 dir = new Vector2(0, 0);
 	[Export] private PlatformType platformType = PlatformType.Static;
-	private bool reverse = false;
-	[Export] private int speed = 2;
+	[Export] private Vector2 pointA = new Vector2(0, 0);
+	[Export] private Vector2 pointB = new Vector2(0, 0);
+	private int speed = 2;
+	public Vector2 velocity = new Vector2(0, 0);
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_pointA = GetNode<Position2D>("PointA");
-		_pointB = GetNode<Position2D>("PointB");
-		
-		if (platformType == PlatformType.Static)
-		//ToDo: Fix platform to get them to work properly
+		AddToGroup("Platforms");
 	}
 	
 	// Called every tick to process physics
 	public override void _PhysicsProcess(float delta)
 	{
+		GetDir();
 		Movement();
 	}
 	
-	// Called during _PhysicsProcess to conduct movement
-	private void Movement()
+	private void GetDir()
 	{
-		var velocity = FromAToB();
-		MoveAndSlide(velocity);
-	}
-	
-	// Called during Movement to determine which direction to move in
-	private Vector2 FromAToB()
-	{
-		var dir = new Vector2(0, 0);
+		var endPoint = new Vector2(0, 0);
 		
-		if ((Vector2.Distance(Position, _pointA.Position) <= 1) ||
-		(Vector2.Distance(Position, _pointB.Position) <= 1))
+		if (aToB)
 		{
-			reverse = !reverse;
-		}
-		
-		if (reverse)
-		{
-			dir = _pointA.Position - _pointB.Position;
+			if (Position.DistanceTo(pointB) >= speed) endPoint = pointB;
+			else
+			{
+				endPoint = pointA;
+				aToB = false;
+			}
 		} else
 		{
-			dir = _pointB.Position - _pointA.Position;
+			if (Position.DistanceTo(pointA) >= speed) endPoint = pointA;
+			else
+			{
+				endPoint = pointB;
+				aToB = true;
+			}
 		}
 		
-		dir = speed * dir.Normalize();
-		
-		return dir;
+		var direction = Position.DirectionTo(endPoint);
+		if (Math.Abs(direction.x) > Math.Abs(direction.y)) 
+		{
+			dir = new Vector2(Math.Sign(direction.x), 0);
+		} else
+		{
+			dir = new Vector2(0, Math.Sign(direction.y));
+		}
+	}
+	
+	private void Movement()
+	{
+		if (platformType == PlatformType.Dynamic)
+		{
+			velocity = dir * speed;
+			EmitSignal("moving", velocity);
+			MoveAndCollide(velocity);
+		}
 	}
 }

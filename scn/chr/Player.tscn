@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://spt/PlayerController.cs" type="Script" id=1]
-[ext_resource path="res://img/plr/PlayerMove.png" type="Texture" id=2]
-[ext_resource path="res://img/ui/health.png" type="Texture" id=3]
-[ext_resource path="res://img/ui/inventory.png" type="Texture" id=4]
+[ext_resource path="res://img/plr/PlayerMove.png" type="Texture2D" id=2]
+[ext_resource path="res://img/ui/health.png" type="Texture2D" id=3]
+[ext_resource path="res://img/ui/inventory.png" type="Texture2D" id=4]
 [ext_resource path="res://spt/Inventory.cs" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -60,7 +60,7 @@ animations = [ {
 
 [sub_resource type="StyleBoxEmpty" id=11]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 1 )
@@ -69,7 +69,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 frames = SubResource( 5 )
 animation = "Idle"
 playing = true
@@ -80,7 +80,7 @@ zoom = Vector2( 0.08, 0.08 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
-[node name="HealthBar" type="AnimatedSprite" parent="."]
+[node name="HealthBar" type="AnimatedSprite2D" parent="."]
 position = Vector2( 30, -19 )
 frames = SubResource( 10 )
 
@@ -91,37 +91,37 @@ autostart = true
 script = ExtResource( 6 )
 
 [node name="TextureRect" type="TextureRect" parent="Inventory"]
-margin_left = -38.0
-margin_top = 14.0
-margin_right = -7.0
-margin_bottom = 21.0
+offset_left = -38.0
+offset_top = 14.0
+offset_right = -7.0
+offset_bottom = 21.0
 texture = ExtResource( 4 )
 
 [node name="GridContainer" type="GridContainer" parent="Inventory"]
-margin_left = -38.0
-margin_top = 14.0
-margin_right = -7.0
-margin_bottom = 30.0
+offset_left = -38.0
+offset_top = 14.0
+offset_right = -7.0
+offset_bottom = 30.0
 
 [node name="Slot1" type="Panel" parent="Inventory/GridContainer"]
-custom_styles/panel = SubResource( 11 )
+theme_override_styles/panel = SubResource( 11 )
 
 [node name="Slot2" type="Panel" parent="Inventory/GridContainer"]
-margin_top = 4.0
-margin_bottom = 4.0
-custom_styles/panel = SubResource( 11 )
+offset_top = 4.0
+offset_bottom = 4.0
+theme_override_styles/panel = SubResource( 11 )
 
 [node name="Slot3" type="Panel" parent="Inventory/GridContainer"]
-margin_top = 8.0
-margin_bottom = 8.0
-custom_styles/panel = SubResource( 11 )
+offset_top = 8.0
+offset_bottom = 8.0
+theme_override_styles/panel = SubResource( 11 )
 
 [node name="Slot4" type="Panel" parent="Inventory/GridContainer"]
-margin_top = 12.0
-margin_bottom = 12.0
-custom_styles/panel = SubResource( 11 )
+offset_top = 12.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource( 11 )
 
 [node name="Slot5" type="Panel" parent="Inventory/GridContainer"]
-margin_top = 16.0
-margin_bottom = 16.0
-custom_styles/panel = SubResource( 11 )
+offset_top = 16.0
+offset_bottom = 16.0
+theme_override_styles/panel = SubResource( 11 )

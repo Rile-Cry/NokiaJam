@@ -1,0 +1,148 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.2": {
+      "Godot.SourceGenerators/4.3.0": {
+        "type": "package",
+        "build": {
+          "build/Godot.SourceGenerators.props": {}
+        }
+      },
+      "GodotSharp/4.3.0": {
+        "type": "package"
+      },
+      "GodotSharpEditor/4.3.0": {
+        "type": "package"
+      }
+    }
+  },
+  "libraries": {
+    "Godot.SourceGenerators/4.3.0": {
+      "sha512": "fLDNOAo/kpL1JtGXP6b2M48dobzb5YmKSRLXKDt+td8qegu0Ao3H25avoySVmrb52d7zpe8yvgMwba7QMhqnqQ==",
+      "type": "package",
+      "path": "godot.sourcegenerators/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/Godot.SourceGenerators.dll",
+        "build/Godot.SourceGenerators.props",
+        "godot.sourcegenerators.4.3.0.nupkg.sha512",
+        "godot.sourcegenerators.nuspec"
+      ]
+    },
+    "GodotSharp/4.3.0": {
+      "sha512": "mEwRmNIG2k/yPfkFencEkNVXpHCa+uETHkIQcq0MxcsfwJQZ4HueFU5Q9CYDIdd5YrRPqjwuyxbsuD6Je8lfdQ==",
+      "type": "package",
+      "path": "godotsharp/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "godotsharp.4.3.0.nupkg.sha512",
+        "godotsharp.nuspec",
+        "lib/net6.0/GodotSharp.dll",
+        "lib/net6.0/GodotSharp.xml"
+      ]
+    },
+    "GodotSharpEditor/4.3.0": {
+      "sha512": "r7A3lszHS9/gIWoOb7w+MNtEjrD/NRX+9ACHq01GD2+lctu6eHsmlSTA0Ah1bjJDKs9rDZeSq+42zwXvtBsPzQ==",
+      "type": "package",
+      "path": "godotsharpeditor/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "godotsharpeditor.4.3.0.nupkg.sha512",
+        "godotsharpeditor.nuspec",
+        "lib/net6.0/GodotSharpEditor.dll",
+        "lib/net6.0/GodotSharpEditor.xml"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.2": [
+      "Godot.SourceGenerators >= 4.3.0",
+      "GodotSharp >= 4.3.0",
+      "GodotSharpEditor >= 4.3.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\sumat\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\sumat\\Documents\\My Games\\Old Games\\NokiaJam\\NokiaJam.csproj",
+      "projectName": "NokiaJam",
+      "projectPath": "C:\\Users\\sumat\\Documents\\My Games\\Old Games\\NokiaJam\\NokiaJam.csproj",
+      "packagesPath": "C:\\Users\\sumat\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sumat\\Documents\\My Games\\Old Games\\NokiaJam\\.godot\\mono\\temp\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\sumat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net472"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net472": {
+        "targetAlias": "net472",
+        "dependencies": {
+          "Godot.SourceGenerators": {
+            "target": "Package",
+            "version": "[4.3.0, )"
+          },
+          "GodotSharp": {
+            "target": "Package",
+            "version": "[4.3.0, )"
+          },
+          "GodotSharpEditor": {
+            "target": "Package",
+            "version": "[4.3.0, )"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package GodotSharp 4.3.0 is not compatible with net472 (.NETFramework,Version=v4.7.2). Package GodotSharp 4.3.0 supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "GodotSharp",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package GodotSharpEditor 4.3.0 is not compatible with net472 (.NETFramework,Version=v4.7.2). Package GodotSharpEditor 4.3.0 supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "GodotSharpEditor",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2"
+      ]
+    }
+  ]
+}

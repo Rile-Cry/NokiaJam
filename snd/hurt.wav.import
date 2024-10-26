@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/hurt.wav-48da17636968d2a43ec9906abd5df4b5.sample"
+type="AudioStreamWAV"
+uid="uid://be4krrin8m88e"
+path="res://.godot/imported/hurt.wav-48da17636968d2a43ec9906abd5df4b5.sample"
 
 [deps]
 
 source_file="res://snd/hurt.wav"
-dest_files=[ "res://.import/hurt.wav-48da17636968d2a43ec9906abd5df4b5.sample" ]
+dest_files=["res://.godot/imported/hurt.wav-48da17636968d2a43ec9906abd5df4b5.sample"]
 
 [params]
 

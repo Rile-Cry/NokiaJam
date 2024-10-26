@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "Pkn8eu+5rNU=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\sumat\\Documents\\My Games\\Old Games\\NokiaJam\\NokiaJam.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sumat\\.nuget\\packages\\godot.sourcegenerators\\4.3.0\\godot.sourcegenerators.4.3.0.nupkg.sha512",
+    "C:\\Users\\sumat\\.nuget\\packages\\godotsharp\\4.3.0\\godotsharp.4.3.0.nupkg.sha512",
+    "C:\\Users\\sumat\\.nuget\\packages\\godotsharpeditor\\4.3.0\\godotsharpeditor.4.3.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package GodotSharp 4.3.0 is not compatible with net472 (.NETFramework,Version=v4.7.2). Package GodotSharp 4.3.0 supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "GodotSharp",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package GodotSharpEditor 4.3.0 is not compatible with net472 (.NETFramework,Version=v4.7.2). Package GodotSharpEditor 4.3.0 supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "GodotSharpEditor",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2"
+      ]
+    }
+  ]
+}
